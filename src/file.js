@@ -1,5 +1,6 @@
 const { readFile } = require("fs/promises");
 const { join } = require("path");
+const { User } = require('./user')
 const DEFAULT_OPTIONS = {
   maxLines: 3,
   fields: ["id", "name", "profession", "age"],
@@ -10,8 +11,11 @@ class File {
   static async csvToJson(filePath) {
     const content = await File.getFileContent(filePath);
     const validation = File.isValid(content);
-    if (!validation.valid) throw new Error(validation.error);
-    return content;
+
+    const users = File.parseCSVToJSON(content)
+    return users
+    // if (!validation.valid) throw new Error(validation.error);
+    // return content;
   }
 
   static async getFileContent(filePath) {
@@ -52,17 +56,18 @@ class File {
       const columns = line.split(',')
       let user = {}
       for(const index in columns) {
-        
+        user[header[index]] = columns[index]
       }
+      return new User(user)
     })
-     
+    console.log('users', users)
   }
 }
 
 (async () => {
-  const result = await File.csvToJson("../threeItems-valid.csv");
-  // const result = await File.csvToJson("../fourItems-invalid.csv");
-  // const result = await File.csvToJson("../invalid-header.csv");
+  const result = await File.csvToJson("./threeItems-valid.csv");
+  // const result = await File.csvToJson("./fourItems-invalid.csv");
+  // const result = await File.csvToJson("./invalid-header.csv");
   console.log("result:", result);
 })();
 

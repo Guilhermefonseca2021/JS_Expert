@@ -43,6 +43,8 @@ const { rejects, deepStrictEqual } = require("assert")
           "age": 30
         }
       ];
+
+      deepStrictEqual(result, expected)
     }
   }
 )();
