@@ -15,14 +15,14 @@ const { rejects, deepStrictEqual } = require("assert")
       await rejects(result, rejection);
     }
     {
-      const filePath = "";
+      const filePath = "./mocks/fourItems-invalid.csv";
       const rejection = new Error(error.FILE_LENGTH_ERROR_MESSAGE);
       const result = File.csvToJson(filePath);
       await rejects(result, rejection);
     }
     {
-      const filePath = "";
-      const result = File.csvToJson(filePath);
+      const filePath = "./mocks/threeItems-valid.csv";
+      const result = await File.csvToJson(filePath);
       const expected = [
         {
           "id": 123,
