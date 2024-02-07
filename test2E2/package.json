@@ -1,0 +1,16 @@
+{
+  "name": "test2e2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "test": "npx mocha -w *.test.js"
+  },
+  "keywords": [],
+  "author": "Guilhermefonseca2021",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^8.4.0",
+    "supertest": "^6.3.4"
+  }
+}
